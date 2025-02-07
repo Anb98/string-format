@@ -1,0 +1,30 @@
+{
+  "name": "@anb98/string-format",
+  "version": "1.0.0",
+  "description": "Format string dependency using a specified template",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc -b",
+    "prepare": "npm run build"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anb98/string-format.git"
+  },
+  "keywords": [
+    "string",
+    "format"
+  ],
+  "author": "Abdiel martinez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anb98/string-format/issues"
+  },
+  "homepage": "https://github.com/Anb98/string-format#readme",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
