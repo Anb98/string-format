@@ -118,3 +118,7 @@ If you find a bug or would like to request a feature, please create an issue in 
 - Custom placeholder support
 - Template preservation option
 - TypeScript support
+
+### 1.1.0
+
+- Added `removeNonDigits` property

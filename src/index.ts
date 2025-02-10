@@ -1,8 +1,9 @@
-type FormatOptions = {
+export type FormatOptions = {
   template: string;
   value: string;
   placeholder?: string;
   preserveTemplate?: boolean;
+  removeNonDigits?: boolean;
 };
 
 type ValidationResult = {
@@ -25,16 +26,27 @@ export const formatString = ({
   value,
   placeholder = "x",
   preserveTemplate = false,
+  removeNonDigits: shouldRemoveNonDigits = false,
 }: FormatOptions): string => {
   if (preserveTemplate) {
     return preserveTemplateFormat(template, value, placeholder);
   }
 
-  const validation = validateInput(template, value, placeholder);
+  const validation = validateInput({
+    template,
+    value,
+    placeholder,
+    removeNonDigits: shouldRemoveNonDigits,
+  });
   return validation.isComplete
     ? formatComplete(template, validation.value, placeholder)
     : formatPartial(template, validation.value, placeholder);
 };
+
+/**
+ * Removes all non-digit characters from a string
+ */
+const removeNonDigits = (value: string): string => value.replace(/\D/g, "");
 
 /**
  * Preserves the template format and only replaces placeholders
@@ -90,15 +102,17 @@ const preserveTemplateFormat = (
 /**
  * Validates and prepares the input for formatting
  */
-const validateInput = (
-  template: string,
-  value: string,
-  placeholder: string
-): ValidationResult => {
+const validateInput = ({
+  template,
+  value,
+  placeholder = "",
+  removeNonDigits: shouldRemoveNonDigits,
+}: Omit<FormatOptions, "preserveTemplate">): ValidationResult => {
+  const cleanedValue = shouldRemoveNonDigits ? removeNonDigits(value) : value;
   const requiredLength = countPlaceholders(template, placeholder);
 
   return {
-    value,
+    value: cleanedValue,
     requiredLength,
     isComplete: value.length >= requiredLength,
   };
