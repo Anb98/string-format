@@ -28,9 +28,8 @@ export const formatString = ({
   preserveTemplate = false,
   removeNonDigits: shouldRemoveNonDigits = false,
 }: FormatOptions): string => {
-  if (preserveTemplate) {
+  if (preserveTemplate)
     return preserveTemplateFormat(template, value, placeholder);
-  }
 
   const validation = validateInput({
     template,
@@ -114,7 +113,7 @@ const validateInput = ({
   return {
     value: cleanedValue,
     requiredLength,
-    isComplete: value.length >= requiredLength,
+    isComplete: cleanedValue.length >= requiredLength,
   };
 };
 
