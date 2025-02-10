@@ -58,6 +58,14 @@ const preservedResult = formatString({
   preserveTemplate: true,
 });
 console.log(preservedResult); // Output: '+1 (713) 47'
+
+// Removing non digits fromm value
+const preservedResult = formatString({
+  template: "+1 (xxx) xxx-xxxx",
+  value: "+1 (713) 47",
+  removeNonDigits: true,
+});
+console.log(preservedResult); // Output: '+1 (713) 47'
 ```
 
 ## API Reference
@@ -74,6 +82,7 @@ type FormatOptions = {
   value: string; // The value to format
   placeholder?: string; // Custom placeholder character (default: 'x')
   preserveTemplate?: boolean; // Whether to preserve template characters (default: false)
+  removeNonDigits?: boolean; // Whether to remove non digits from value property (default: false)
 };
 ```
 
@@ -83,6 +92,7 @@ type FormatOptions = {
 - `value` (required): The string value to insert into the template.
 - `placeholder` (optional): The character to use as a placeholder. Defaults to 'x'.
 - `preserveTemplate` (optional): Whether to preserve existing template characters in the value. Defaults to false.
+- `removeNonDigits` (optional): Whether to remove non digits from value property. Defaults to false.
 
 ## Common Use Cases
 
